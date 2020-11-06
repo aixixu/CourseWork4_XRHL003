@@ -15,15 +15,16 @@ xMax = 1.
 r = []
 for i in range(12):
     r.append(np.random.uniform(xMin, xMax, numVal))
+
 xData_1 = r[0] + r[1] - 1
 xData_2 = r[0] + r[1]+ r[2] + r[3] - 2
 xData_3 = -6
 for i in range(12):
     xData_3 = xData_3 + r[i]
 
-xHist1, bin_edges1 = np.histogram(xData_1, bins=nBins, range=(xMin, xMax))
-xHist2, bin_edges2 = np.histogram(xData_2, bins=nBins, range=(xMin, xMax))
-xHist3, bin_edges3 = np.histogram(xData_3, bins=nBins, range=(xMin, xMax))
+xHist1, bin_edges1 = np.histogram(xData_1, bins=nBins, range=(xMin-1, xMax))
+xHist2, bin_edges2 = np.histogram(xData_2, bins=nBins, range=(xMin-2, xMax+1))
+xHist3, bin_edges3 = np.histogram(xData_3, bins=nBins, range=(xMin-6, xMax+5))
 # make plot and save in file
 
 # for xData_1 the plot as follow
@@ -34,10 +35,11 @@ fig1, ax1= plt.subplots(1,1)
 plt.gcf().subplots_adjust(bottom=0.15)
 plt.gcf().subplots_adjust(left=0.15)
 plt.title('Histogram of x = r1+ r2− 1')
-ax1.set_xlim((xMin, xMax))
-ax1.set_ylim((0., 150))
+ax1.set_xlim((xMin-1, xMax))
+ax1.set_ylim((0., 300))
 plt.xlabel(r'$x$', labelpad=0)
 plt.plot(xPlot1, yPlot1)
+fig1 = plt.gcf()
 plt.show()
 fig1.savefig("uniformHist1.png")
 
@@ -49,10 +51,11 @@ fig2, ax2= plt.subplots(1,1)
 plt.gcf().subplots_adjust(bottom=0.15)
 plt.gcf().subplots_adjust(left=0.15)
 plt.title('Histogram of x =  r1+ r2+ r3+ r4− 2')
-ax2.set_xlim((xMin, xMax))
-ax2.set_ylim((0., 150))
+ax2.set_xlim((xMin-2, xMax+1))
+ax2.set_ylim((0., 350))
 plt.xlabel(r'$x$', labelpad=0)
 plt.plot(xPlot2, yPlot2)
+fig2 = plt.gcf()
 plt.show()
 fig2.savefig("uniformHist2.png")
 
@@ -64,9 +67,10 @@ fig3, ax3= plt.subplots(1,1)
 plt.gcf().subplots_adjust(bottom=0.15)
 plt.gcf().subplots_adjust(left=0.15)
 plt.title('Histogram of x =  r1+ r2+ r3+ ...+ r12 −6')
-ax3.set_xlim((xMin, xMax))
-ax3.set_ylim((0., 150))
+ax3.set_xlim((xMin-6, xMax+5))
+ax3.set_ylim((0., 550))
 plt.xlabel(r'$x$', labelpad=0)
 plt.plot(xPlot3, yPlot3)
+fig3 = plt.gcf()
 plt.show()
 fig3.savefig("uniformHist3.png")
