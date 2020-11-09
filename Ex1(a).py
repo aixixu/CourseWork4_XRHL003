@@ -1,7 +1,3 @@
-# simpleMC.py -- simple Monte Carlo program to make histogram of uniformly
-# distributed random values and plot
-# G. Cowan, RHUL Physics, October 2019
-
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
@@ -10,11 +6,11 @@ import numpy as np
 
 numVal = 10000
 nBins = 100
-xMin = 0.
-xMax = 1.
+rMin = 0.
+rMax = 1.
 r = []
 for i in range(12):
-    r.append(np.random.uniform(xMin, xMax, numVal))
+    r.append(np.random.uniform(rMin, rMax, numVal))
 
 xData_1 = r[0] + r[1] - 1
 xData_2 = r[0] + r[1]+ r[2] + r[3] - 2
@@ -22,9 +18,9 @@ xData_3 = -6
 for i in range(12):
     xData_3 = xData_3 + r[i]
 
-xHist1, bin_edges1 = np.histogram(xData_1, bins=nBins, range=(xMin-1, xMax))
-xHist2, bin_edges2 = np.histogram(xData_2, bins=nBins, range=(xMin-2, xMax+1))
-xHist3, bin_edges3 = np.histogram(xData_3, bins=nBins, range=(xMin-6, xMax+5))
+xHist1, bin_edges1 = np.histogram(xData_1, bins=nBins, range=(2*rMin-1, 2*rMax-1))
+xHist2, bin_edges2 = np.histogram(xData_2, bins=nBins, range=(4*rMin-2, 4*rMax-2))
+xHist3, bin_edges3 = np.histogram(xData_3, bins=nBins, range=(12*rMin-6, 12*rMax-6))
 # make plot and save in file
 
 # for xData_1 the plot as follow
@@ -35,7 +31,7 @@ fig1, ax1= plt.subplots(1,1)
 plt.gcf().subplots_adjust(bottom=0.15)
 plt.gcf().subplots_adjust(left=0.15)
 plt.title('Histogram of x = r1+ r2− 1')
-ax1.set_xlim((xMin-1, xMax))
+ax1.set_xlim((2*rMin-1, 2*rMax-1))
 ax1.set_ylim((0., 300))
 plt.xlabel(r'$x$', labelpad=0)
 plt.plot(xPlot1, yPlot1)
@@ -51,7 +47,7 @@ fig2, ax2= plt.subplots(1,1)
 plt.gcf().subplots_adjust(bottom=0.15)
 plt.gcf().subplots_adjust(left=0.15)
 plt.title('Histogram of x =  r1+ r2+ r3+ r4− 2')
-ax2.set_xlim((xMin-2, xMax+1))
+ax2.set_xlim((4*rMin-2, 4*rMax-2))
 ax2.set_ylim((0., 350))
 plt.xlabel(r'$x$', labelpad=0)
 plt.plot(xPlot2, yPlot2)
@@ -67,7 +63,7 @@ fig3, ax3= plt.subplots(1,1)
 plt.gcf().subplots_adjust(bottom=0.15)
 plt.gcf().subplots_adjust(left=0.15)
 plt.title('Histogram of x =  r1+ r2+ r3+ ...+ r12 −6')
-ax3.set_xlim((xMin-6, xMax+5))
+ax3.set_xlim((12*rMin-6, 12*rMax-6))
 ax3.set_ylim((0., 550))
 plt.xlabel(r'$x$', labelpad=0)
 plt.plot(xPlot3, yPlot3)
